@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet" 
+  /> -->
+  <script src="https://kit.fontawesome.com/c9cc469801.js" crossorigin="anonymous"></script>
+  <script src="../../asset/vue.js"></script>
+  <link rel="stylesheet" href="../../shared/common_css/common_import.css" />
+  <!-- <link rel="stylesheet" href="../indexPage/components/image-card/imageCard.css" /> -->
+    <title>index page</title>
+</head>
+<body>
+
+<div id="main" class="w-full   flex justify-start  gap-0">
+
+<header-component></header-component>
+<!-- <loader-component></loader-component> -->
+<div style="padding: 10px;" class="w-full h-screen overflow-hidden overflow-y-auto " >
+    <index-component  ></index-component>
+<search-component  ></search-component> 
+</div>
+
+<!-- <modal-wrapper-component></modal-wrapper-component> -->
+<!-- <div style="z-index:1000;" class="h-screen w-full bg-red absolute top-0 left-0 ">
+    kjh 
+    </div> -->
+
+<!-- <div style="z-index: 100;" class="w-full h-screen bg-green absolute top-0 left-0" >
+fdddd
+</div> -->
+
+</div> 
+
+<script src="../../shared/header/header.js"></script>
+<script src="./index.js"></script>
+<script src="../../shared/loader/loader.js" ></script>
+<script src="../indexPage/components/modal-wrapper/modalWrapper.js"></script>
+<script src="../indexPage/menuSection/search_menu.js"></script>
+<script src="../indexPage/components/image-card/imageCard.js"></script>
+<script src="../indexPage/components/image-details/imageDetails.js"></script>
+<script>
+    // const path=require('path')
+    const store=require(path.join(__dirname,'../../','store/Store.js'))
+    new Vue({
+        el:'#main',
+        store 
+    })
+</script>
+</body>
+</html>

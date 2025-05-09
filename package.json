@@ -1,0 +1,23 @@
+{
+  "name": "image_vault",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "watch": "nodemon --exec electron . --ext html,css,js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^36.1.0"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "nodemon": "^3.1.10",
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.1.0"
+  }
+}
