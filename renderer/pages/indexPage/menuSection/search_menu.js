@@ -7,7 +7,7 @@ const getApiCall = require(path.join(__dirname,'../../shared/apiHelper/getApiHel
 Vue.component('search-component',{
     name:'search-section',
     template:`
-    <div  v-show="sectionVisibility" style="z-index:50;" class=" bg-blue " >
+    <div  v-show="sectionVisibility" style="z-index:50;" class=" " >
  <!--   <loader-component></loader-component>   -->
 
 <div    class="w-full  image-container " >
@@ -15,10 +15,10 @@ Vue.component('search-component',{
 </div>
 
 <!-- ----------- image details modal ----------    -->
-<modal-wrapper-component v-show="isModalVisible && modalImageData" @close-modal-event="isModalVisible=false;modalImageData=null"  >
+<modal-wrapper-component v-show="isModalVisible && modalImageData"  @close-modal-event="isModalVisible=false;modalImageData=null"  >
 <image-details-component  :imageDetails="modalImageData" > </image-details-component>
 </modal-wrapper-component>
-
+ <!-- v-show="isModalVisible && modalImageData" -->
     </div>
     `,
     data(){ 

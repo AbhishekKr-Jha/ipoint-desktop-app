@@ -1,6 +1,6 @@
 
 
-const { BrowserWindow , app }=require('electron')
+const { BrowserWindow , app, ipcMain }=require('electron')
 const path=require('path')
 console.log("the main dir is",path.join(__dirname))
 
@@ -18,10 +18,30 @@ webPreferences:{
 
 
 
+
+
 win.loadFile(path.join(__dirname,'renderer/pages/indexPage/index.html'))
+
+
+ 
+ipcMain.on('open-zoom-window',(event,target)=>{
+  console.log("hello")
+
+  const zoomWindow=new BrowserWindow({
+    height:800,
+    width:1200,
+    frame:false,
+    // parent:win,
+    modal:true,
+})
+
+  zoomWindow.loadFile(path.join(__dirname,'renderer/pages/multiWindow/window01.html'))
+
+})
 
 win.webContents.openDevTools()
 
+zoomWindow.webContents.openDevTools()
 }
 
 

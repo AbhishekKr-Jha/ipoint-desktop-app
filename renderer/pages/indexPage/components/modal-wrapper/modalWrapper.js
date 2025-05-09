@@ -7,7 +7,7 @@ Vue.component('modal-wrapper-component',{
     <div @click="$emit('close-modal-event')" style="z-index:150;" class="h-full  w-full  flex items-center justify-center absolute top-0 left-0 modal-container ">
   
 
-    <div @click.stop class=" w-auto h-auto bg-green ">
+    <div @click.stop class=" w-auto h-auto ">
 
 <slot>
 </slot>
