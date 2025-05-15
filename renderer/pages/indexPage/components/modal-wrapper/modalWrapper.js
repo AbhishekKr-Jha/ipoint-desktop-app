@@ -31,7 +31,7 @@ closeModal(){
 }
     },
     created(){
-        console.log("modal is going to open -- ",this.modalVisibility)
+        // console.log("modal is going to open -- ",this.modalVisibility)
         this.isModal=this.modalVisibility
     }
 })

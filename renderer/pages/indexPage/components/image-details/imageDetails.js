@@ -4,17 +4,17 @@ const { ipcRenderer } = require("electron")
 Vue.component('image-details-component',{
     name:'image-details',
     template:`
-    <div style="padding:15px ;" class="w-screen-80 h-80  flex gap-20 items-center justify-center rounded-lg overflow-hidden image-details-container "  >
+    <div style="padding:15px ;max-height:750px;max-width:1200px" class="w-screen-80 h-80  flex gap-20 items-center justify-center rounded-lg overflow-hidden image-details-container inner-modal-component "  >
 
 
 
-    <div style="padding:15px 0; " class="w-half flex flex-col gap-20" >
+    <div style="padding:15px; " class="w-half h-full flex flex-col gap-20 " >
 
-<div style="height:400" class="w-full rounded-lg overflow-hidden" >
-<img :src="imageDetails?.src?.original"   class="w-full h-full object-fit-contain"  alt="load..." >
+<div style="height:400px;" class=" rounded-lg overflow-hidden " >
+<img :src="imageDetails?.src?.original"   class="w-full  h-full object-fit-contain rounded-lg overflow-hidden"  alt="load..." >
 </div>
 
-<div  style="border:1px solid white;padding:15px 0;"  class="w-full flex justify-center gap-20  rounded-lg " >
+<div  style="border:1px solid blue;padding:15px 0;"  class="w-full flex justify-center gap-20  rounded-lg " >
 
 
 <!--  --------------share------------        -->
@@ -37,11 +37,11 @@ Vue.component('image-details-component',{
     </div>
 
 
-<div v-if="imageDetails"  style="border:1px solid white;padding:15px;"  class="flex-1 flex flex-col gap-20 h-full rounded-lg " >
+<div v-if="imageDetails"  style="border:1px solid blue;padding:15px;"  class="flex-1  flex flex-col gap-20 h-full rounded-lg " >
 
-<p class="text-xl font-medium text-white" > Photographer :  <span class="text-white text-xl "> {{imageDetails.photographer}} </span> 
+<p class="text-xl font-medium " > Photographer :  <span class=" text-xl "> {{imageDetails.photographer}} </span> 
 
-<p class="text-xl font-medium text-white" > About :  <span class="text-white text-xl " > {{imageDetails.alt}} </span>  </p>
+<p class="text-xl font-medium " > About :  <span class=" text-xl " > {{imageDetails.alt}} </span>  </p>
 
 </div>
 
@@ -75,7 +75,7 @@ Vue.component('image-details-component',{
             }
     },
     created(){
-        console.log("the imaged data passed as prop in imageDetails is ",this.imageDetails)
+        // console.log("the imaged data passed as prop in imageDetails is ",this.imageDetails)
     },
     updated(){
         console.log(this.imageDetails)

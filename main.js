@@ -24,7 +24,7 @@ win.loadFile(path.join(__dirname,'renderer/pages/indexPage/index.html'))
 
 
  
-ipcMain.on('open-zoom-window',(event,target)=>{
+ipcMain.on('open-zoom-window',(event,data)=>{
   console.log("hello")
 
   const zoomWindow=new BrowserWindow({
@@ -33,13 +33,19 @@ ipcMain.on('open-zoom-window',(event,target)=>{
     frame:false,
     // parent:win,
     modal:true,
+    webPreferences:{
+      nodeIntegration:true,
+      contextIsolation:false
+    }
 })
 
-  zoomWindow.loadFile(path.join(__dirname,'renderer/pages/multiWindow/window01.html'))
+  zoomWindow.loadFile(path.join(__dirname,'renderer/pages/multiWindow/window01.html')).then(()=>{
+    zoomWindow.webContents.send('get-zoom-image-data',data)
+  })
 
 })
 
-win.webContents.openDevTools()
+// win.webContents.openDevTools()
 
 zoomWindow.webContents.openDevTools()
 }

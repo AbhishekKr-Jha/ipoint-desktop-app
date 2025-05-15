@@ -2,27 +2,27 @@
 const path=require('path')
 // console.log(path.join(__dirname,'../../shared/apiHelper/getApiHelper.js'))
 const getApiCall = require(path.join(__dirname,'../../shared/apiHelper/getApiHelper.js'));
-
+const axios=require('axios')
 
 Vue.component('search-component',{
     name:'search-section',
     template:`
-    <div  v-show="sectionVisibility" style="z-index:50;" class=" " >
- <!--   <loader-component></loader-component>   -->
+    <div   style="z-index:50;" class=" " >
+  <loader-component v-show="isLoader" message="Fetching Search results..." ></loader-component>   
 
-<div    class="w-full  image-container " >
+<div  v-show="!isLoader"   class="w-full  image-container " >
 <image-card-component v-for="(item,index) in imageList" :key="item.id" :imageData="item" :imageIndex="index"  @open-modal-event="handleOpenModalEvent" ></image-card-component>
 </div>
 
 <!-- ----------- image details modal ----------    -->
-<modal-wrapper-component v-show="isModalVisible && modalImageData"  @close-modal-event="isModalVisible=false;modalImageData=null"  >
+<modal-wrapper-component v-show="!isLoader && isModalVisible && modalImageData"  @close-modal-event="isModalVisible=false;modalImageData=null"  >
 <image-details-component  :imageDetails="modalImageData" > </image-details-component>
 </modal-wrapper-component>
- <!-- v-show="isModalVisible && modalImageData" -->
     </div>
     `,
     data(){ 
         return{
+            isLoader:false,
             isModalVisible:false, 
             imageList:[],
             modalImageData:null,
@@ -53,22 +53,31 @@ trydata:[
         }
     },
     computed:{
-        sectionVisibility(){ return this.$store.state.visibleSection === "search-section"; }
+        currentSearchQuery(){ return this.$store.state.searchQuery }
+    },
+    watch:{
+currentSearchQuery(newVal){
+    this.fetchSearchResult(newVal)
+}
     },
     methods:{
         async fetchSearchResult(querySearch="cat"){ 
-            const result=await getApiCall({
-                url:`https://api.pexels.com/v1/search?query=${querySearch}&per_page=15`,
-                headers: {
+            this.isLoader=true
+try {
+    const result=await axios.get(`https://api.pexels.com/v1/search?query=${querySearch}&per_page=15`,{
+          headers: {
                     Authorization: "eqLtGNKRE2qbMsqETmnrVI5NqRcUIG7bsf6UYUxASOiPNXLSyDLC0pkG"
                 }
-            }) 
-if(result.success){
-    // console.log("data fetched successfully")
-    this.imageList=result.responseData?.photos
-    return
+            }
+    )
+    console.log("thei image list length is",result.data.photos.length)
+    this.imageList=result.data.photos
+    this.isLoader=false
+} catch (error) {
+        this.isLoader=false
+    console.log(error)
+    console.log("search result data cannot be fetched successfully!")
 }
-console.log("api call not successful",result.errorMessage || "Api call aborted!")
 
         },
         handleOpenModalEvent(index){
@@ -78,6 +87,7 @@ console.log("api call not successful",result.errorMessage || "Api call aborted!"
         }
     },
     created(){
+        // console.log("hello sercah is running")
         this.fetchSearchResult()
     }
 })   

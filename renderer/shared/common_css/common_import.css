@@ -3,7 +3,10 @@
 
 @import url('./common_base.css');
 @import url('./common_main.css');
+@import url('./loader.css');
+@import url('./upload_menu.css');
 @import url('../../pages/indexPage/components/modal-wrapper/modalWrapper.css');
+@import url('../../pages/indexPage/components/verify-email/emailVerification.css');
 @import url('./common_header.css');
 @import url('./loader.css');
 @import url('../../pages/indexPage/components/image-card/imageCard.css');

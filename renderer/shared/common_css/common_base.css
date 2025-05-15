@@ -216,6 +216,8 @@
 .mt-40 {
   margin-top: 40px;
 }
+.mt-60{margin-top: 60px;}
+.mt-120{margin-top: 120px;}
 
 .pt-20 {
   padding-top: 20px;
@@ -223,7 +225,7 @@
 .pt-40 {
   padding-top: 40px;
 }
-
+.bg-transparent{background: transparent;}
 .bg-red {
   background-color: red;
 }
@@ -323,6 +325,9 @@
 .text-3xl {
   font-size: 36px;
 }
+.text-5xl{
+  font-size: 48px;
+}
 
 .text-primary {
   color: rgb(1, 84, 154);
@@ -333,6 +338,9 @@
 
 .bg-primary {
   background-color: rgb(1, 84, 154);
+}
+.bg-white{
+  background-color: rgb(210, 205, 205);
 }
 
 .object-fit-contain {

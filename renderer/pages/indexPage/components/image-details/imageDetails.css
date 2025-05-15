@@ -2,19 +2,15 @@
 
 
 
-.modal-container{
-    background-color: rgba(128, 128, 128, 0.246);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-}
 
 
-.image-details-container{
+
+/* .image-details-container{
 max-width:1600px;
 max-height:1200px;
     background-color: #131313;
 
-}
+} */
 
 .image-details-icon-container{
     background-color: blue;

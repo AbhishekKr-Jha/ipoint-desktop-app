@@ -1,3 +1,4 @@
+const { ipcRenderer } = require("electron")
 
 
 Vue.component('zoom-component-section',{
@@ -5,7 +6,7 @@ Vue.component('zoom-component-section',{
     template:`
     <div style="background-color:gray;" class="w-full h-full overflow-auto ">
 
-<img ref="zoomImg" src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg"  class="w-full h-full object-fit-contain" alt="loading..."   >
+<img ref="zoomImg" :src="zoomImageUrl"  class="w-full h-full object-fit-contain" alt="loading..."   >
 
 
 <div class="absolute left-50 top-80 translate-center flex justify-center items-center gap-30" >
@@ -24,10 +25,11 @@ Vue.component('zoom-component-section',{
     `,
     data(){
         return{
-imageScaleValue:1
+imageScaleValue:1,
+zoomImageUrl:null 
         }
     },
-    methods:{
+    methods:{ 
 zoom_in_func(){
     console.log("ok zooming")
     if(this.imageScaleValue >= 3)  return
@@ -40,5 +42,11 @@ zoom_out_func(){
         this.imageScaleValue=this.imageScaleValue-0.2
 this.$refs.zoomImg.style.transform=`scale(${this.imageScaleValue})`
 }
+    },
+    created(){
+        ipcRenderer.on('get-zoom-image-data',(event,data)=>{
+            console.log("zoom image event fired in zoom-compoenet and data url is",data)
+            this.zoomImageUrl=data.imageUrl
+        })
     }
 })
