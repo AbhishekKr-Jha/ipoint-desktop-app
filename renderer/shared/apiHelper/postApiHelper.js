@@ -2,7 +2,8 @@
 
 const axios=require('axios')
 
-const baseUrl='http://localhost:3000/api/v1'
+// const baseUrl='http://localhost:3000/api/v1'
+const baseUrl='https://ipoint-backend.onrender.com/api/v1'
 
 const postApiCall=async(url,data,headers={})=>{
 try {
