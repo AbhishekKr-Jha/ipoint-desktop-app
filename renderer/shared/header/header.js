@@ -43,11 +43,11 @@ Vue.component('header-component',{
                     title:' Upload',
                     section:'upload-section'
                 },
-                // {
-                //     icon:'fa-solid fa-eye ',
-                //     title:' View ',
-                //     section:'view-section'
-                // },
+                {
+                    icon:'fa-solid fa-share ',
+                    title:' Share ',
+                    section:'share-section'
+                },
                   {
                     icon:'fa-solid fa-check ',
                     title:' Verify ',

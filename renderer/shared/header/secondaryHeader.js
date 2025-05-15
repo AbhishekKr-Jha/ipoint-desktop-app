@@ -14,8 +14,8 @@ Vue.component('secondary-header-component',{
 
     <div class=" flex gap-30 items-center  text-base">
     <div class="flex items-center gap-10 " >
-    <div class="pulse-ball pulse-ball-inactive "  ></div>
- <p class="text-white">User Offline</p>
+    <div style="" class="pulse-ball" :class="isUserOnline ? 'pulse-ball-active' : ' pulse-ball-inactive' "  ></div>
+     <p  class="text-white" >{{isUserOnline? "Online" : "Offline" }}</p>
     </div>
 
     <div class="flex items-center gap-10" >
@@ -34,7 +34,9 @@ searchValue:null
     },
     computed:{
         isUserVerified(){ return this.$store.state.isUserVerified },
-        currentVisibleSection(){  return this.$store.state.visibleSection }
+        currentVisibleSection(){  return this.$store.state.visibleSection },
+                isUserOnline(){ return  this.$store.state.isUserOnline }
+
     },
     methods:{
         handleSearch(){

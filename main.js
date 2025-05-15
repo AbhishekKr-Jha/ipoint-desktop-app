@@ -45,7 +45,7 @@ ipcMain.on('open-zoom-window',(event,data)=>{
 
 })
 
-// win.webContents.openDevTools()
+win.webContents.openDevTools()
 
 zoomWindow.webContents.openDevTools()
 }

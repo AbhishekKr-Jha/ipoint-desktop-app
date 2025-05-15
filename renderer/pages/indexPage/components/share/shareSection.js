@@ -3,10 +3,15 @@
 Vue.component('share-component',{
     name:'share-section',
     template:`
-        <div style="padding:15px ;" class="w-screen-80 h-80 bg-red  flex gap-20 items-center justify-center rounded-lg overflow-hidden inner-modal-component "  >
+
+  <div  style="z-index:50;" class="w-full flex flex-col items-center  " >
 
 
-<div class="w-full flex flex-col items-center  justify-center gap-20" >
+
+
+  <div style="padding:15px ;" class="w-screen-80   flex flex-col gap-20 items-center justify-center " >
+   <h2 style="margin-top:20px;"  class=" text-5xl  ">Share the file </h2>
+<div class="w-full mt-20 flex flex-col items-center  justify-center gap-20" >
 
 <input type="text" :value="userEmail" class="input " placeholder="Your Email"  >
 <input type="text" v-model="receiverEmail" class="input " placeholder="Share to ..."  >
@@ -22,7 +27,7 @@ Vue.component('share-component',{
 <div class="w-90 mt-20 flex justify-start gap-20 relative" >
  
 <div class="flex " >
-<div style="background-color:white;" v-for="(file,index) in fileList" :key="file.name" class="relative rounded-lg share-file-box-preview" :class="file.type.split('/')[0]!=='image' && 'border' " > 
+<div style="background-color:white;" v-for="(file,index) in fileList" :key="file.name" class="relative rounded-lg share-file-box-preview" :class="file.type.split('/')[0]!=='image' && 'border' " :title="file?.name" > 
 <p  v-if="file.type.split('/')[0]!=='image' "  class="text " > .{{file.name.split('.')[1]}} </p>
 <img v-if="file.type.split('/')[0]==='image' " class="w-full h-full rounded-lg object-fit-contain "  :src="file?.preview"  alt="load...">
 <span @click="handleUnselectFile(index)" style="top:-10px;left:-10px;width:25px;height:25px;" class="absolute pointer bg-white rounded-full flex items-center justify-center" > <i class="fa-solid fa-xmark text-lg text-primary"></i> </span>
@@ -47,6 +52,9 @@ Vue.component('share-component',{
 </div>
 
 </div>
+
+</div>
+
 
     </div>
         </div>

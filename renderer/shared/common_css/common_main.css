@@ -79,3 +79,7 @@ padding-left:0px
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+      /* <!--  <div style="padding:15px ;" class="w-screen-80 h-80 bg-red  flex gap-20 items-center justify-center rounded-lg overflow-hidden inner-modal-component "  >  -->
+ <div style="padding:15px ;" class="w-screen-80 h-80 hidden bg-red  flex gap-20 items-center justify-center rounded-lg overflow-hidden inner-modal-component "  >  </div> */

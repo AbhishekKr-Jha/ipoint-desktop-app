@@ -3,6 +3,7 @@ const persistedStorage = require('vuex-persistedstate');
 
 const store = new Vuex.Store({
   state: {
+    isUserOnline: null,
     visibleSection: 'search-section',
     userEmail:null,
     userVerificationToken:null,
@@ -11,6 +12,9 @@ const store = new Vuex.Store({
     searchQuery:null
   }, 
   mutations: {
+    changeUserOnlineStatus(state,payload){
+   state.isUserOnline=payload
+    },
     change_section_visibility(state, payload) { 
       state.visibleSection = payload;
     },
