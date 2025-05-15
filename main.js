@@ -1,14 +1,19 @@
 
 
-const { BrowserWindow , app, ipcMain }=require('electron')
+const { BrowserWindow , app, ipcMain, Menu , screen}=require('electron')
 const path=require('path')
 console.log("the main dir is",path.join(__dirname))
 
 const create_window_func=()=>{
  
+  const primaryDisplay = screen.getPrimaryDisplay(); 
+  const { width, height } = primaryDisplay.workAreaSize;
+  
 const win=new BrowserWindow({
-    height:800,
-    width:1200,
+    height:height,
+    width:width,
+    // height:800,
+    // width:1200,
     // frame:false,
 webPreferences:{
     nodeIntegration:true,
@@ -30,7 +35,7 @@ ipcMain.on('open-zoom-window',(event,data)=>{
   const zoomWindow=new BrowserWindow({
     height:800,
     width:1200,
-    frame:false,
+    // frame:false,
     // parent:win,
     modal:true,
     webPreferences:{
@@ -44,10 +49,13 @@ ipcMain.on('open-zoom-window',(event,data)=>{
   })
 
 })
+  Menu.setApplicationMenu(null);
 
-win.webContents.openDevTools()
+// win.webContents.openDevTools()
 
-zoomWindow.webContents.openDevTools()
+// zoomWindow.webContents.openDevTools()
+
+
 }
 
 

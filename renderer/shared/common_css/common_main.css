@@ -9,6 +9,7 @@ html,body{width: 100vw;height: 100%;overflow: hidden;  font-family: "Itim", curs
 .button{
    min-width: 100px;
    padding: 12px 25px;
+   /* margin-bottom:100px; */
 border-radius: 8px;
 border: none;
     background-color: #5C31FF;
@@ -83,3 +84,34 @@ padding-left:0px
 
       /* <!--  <div style="padding:15px ;" class="w-screen-80 h-80 bg-red  flex gap-20 items-center justify-center rounded-lg overflow-hidden inner-modal-component "  >  -->
  <div style="padding:15px ;" class="w-screen-80 h-80 hidden bg-red  flex gap-20 items-center justify-center rounded-lg overflow-hidden inner-modal-component "  >  </div> */
+
+ .connection-button{
+    color: white;
+    padding:12px 18px;
+    border-radius: 8px;
+    border: none;
+    /* font-size: 18px; */
+ }
+
+
+
+ .fa-icon {
+  font-family: "Font Awesome 6 Free"; /* or 5 if you're using v5 */
+  font-weight: 900; /* 900 = solid, 400 = regular, 100 = light */
+  font-style: normal;
+}
+
+.image-download-icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+/* <span style="width:50px;flex-shrink:0;" class="h-full  "  ><i class=" text-2xl text-white flex justify-center items-center "  :class="item.icon"  ></i></span>  */

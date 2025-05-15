@@ -4,6 +4,7 @@ const persistedStorage = require('vuex-persistedstate');
 const store = new Vuex.Store({
   state: {
     isUserOnline: null,
+    previousPage:null,
     visibleSection: 'search-section',
     userEmail:null,
     userVerificationToken:null,
@@ -12,6 +13,9 @@ const store = new Vuex.Store({
     searchQuery:null
   }, 
   mutations: {
+updatePreviousPage(state,payload){
+state.previousPage=payload
+},
     changeUserOnlineStatus(state,payload){
    state.isUserOnline=payload
     },

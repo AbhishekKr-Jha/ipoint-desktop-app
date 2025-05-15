@@ -12,13 +12,13 @@ Vue.component("verification-component", {
   template: `
     <div   style="z-index:50;" class="w-full relative  flex  flex-col gap-30  items-center " >
 
-    <loader-component v-show="isLoader" ></loader-component>
+    <loader-component v-show="isLoader" :message="message" ></loader-component>
 
 
     <h2 v-show="!isLoader"  class=" mt-120 text-5xl  ">User Verification </h2>
 
 <div v-show="!isLoader && !isOtpInputVisible" class="w-full flex flex-col items-center gap-30 " >
-<input type="text" v-model="email" class="input "  :style="true && {backgroundColor:'rgba(181, 178, 178,0.5)'} " placeholder="Your Email" :disabled="isUserVerified" >
+<input type="text" v-model="email" class="input "  :style="isUserVerified && {backgroundColor:'rgba(181, 178, 178,0.5)'} " placeholder="Your Email" :disabled="isUserVerified" >
     <button type="button" v-show="!isUserVerified " @click="requestOtpHandler" class=" button" >Continue </button>
   <button type="button" v-show="isUserVerified " @click="changeUser" class=" button" >Change Email </button>
 
@@ -44,7 +44,8 @@ Vue.component("verification-component", {
       email: 'akjha4127@gmail.com',
       otp: null,
       isLoader: false,
-      token:null
+      token:null,
+      message:"Requesting otp..."
     };
   },
   computed: {
@@ -57,7 +58,9 @@ isUserVerified() {  return this.$store.state.isUserVerified }
       this.isLoader=false
       if(result.success){
 this.isOtpInputVisible=true 
+this.otp=result.responseData.otp
 this.token=result.responseData.token
+this.message="Verifying otp..."
         return
       }
       console.log("the error in request otp is",result.errorMessage)

@@ -4,7 +4,7 @@ const { ipcRenderer } = require("electron")
 Vue.component('zoom-component-section',{
     name:'zoom-section',
     template:`
-    <div style="background-color:gray;" class="w-full h-full overflow-auto ">
+    <div style="background-color:white;" class="w-full h-full overflow-auto ">
 
 <img ref="zoomImg" :src="zoomImageUrl"  class="w-full h-full object-fit-contain" alt="loading..."   >
 

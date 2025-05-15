@@ -2,7 +2,7 @@
 
 const axios=require('axios')
 
-const baseUrl='http://localhost:5000/api/v1'
+const baseUrl='http://localhost:3000/api/v1'
 
 const postApiCall=async(url,data,headers={})=>{
 try {

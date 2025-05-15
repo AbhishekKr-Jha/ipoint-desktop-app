@@ -7,7 +7,7 @@ Vue.component('secondary-header-component',{
 
 
 <div  v-show="currentVisibleSection =='search-section' " class="w-auto rounded-lg flex items-center gap-10 search-container" >
-<input v-model="searchValue"   type="text" style="max-width:400px;padding:5px 12px;" class="input" placeholder="Your Search Query" >   
+<input v-model="searchValue"   type="text" style="max-width:500px;padding:5px 12px;" class="input" placeholder="Your Search Query" >   
 <span @click="handleSearch" class="pointer" ><i style="color:#5C31FF;" class="fa-solid fa-magnifying-glass text-2xl "></i></span>
 </div>
 

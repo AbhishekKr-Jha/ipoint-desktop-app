@@ -17,13 +17,13 @@ Vue.component('image-details-component',{
 <div  style="border:1px solid blue;padding:15px 0;"  class="w-full flex justify-center gap-20  rounded-lg " >
 
 
-<!--  --------------share------------        -->
-<div   class="flex items-center justify-center pointer rounded-lg image-details-icon-container" >
+<!--  --------------share------------        
+<div   class=" hidden flex items-center justify-center pointer rounded-lg image-details-icon-container" >
 <i class=" text-2xl text-white fa-solid fa-share " ></i>
-</div>
+</div> -->
 
 <!--   -------------download------------       -->
-<div   class="flex items-center justify-center pointer rounded-lg image-details-icon-container" >
+<div @click="downloadFile(imageDetails?.src?.original)"  class="flex items-center justify-center pointer rounded-lg image-details-icon-container" >
 <i class=" text-2xl text-white fa-solid fa-download " ></i>
 </div>
 
@@ -72,7 +72,16 @@ Vue.component('image-details-component',{
     methods:{
             openZoomWindow(){
                 ipcRenderer.send('open-zoom-window',{imageUrl:this.imageDetails?.src?.original})
-            }
+            },
+             downloadFile(fileurl) {
+      const url = fileurl 
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = ''; 
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
     },
     created(){
         // console.log("the imaged data passed as prop in imageDetails is ",this.imageDetails)
