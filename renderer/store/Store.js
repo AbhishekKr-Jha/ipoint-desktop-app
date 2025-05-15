@@ -8,7 +8,7 @@ const store = new Vuex.Store({
     visibleSection: 'search-section',
     userEmail:null,
     userVerificationToken:null,
-    isUserVerified:true,
+    isUserVerified:false, 
     isShareModalActive:true,
     searchQuery:null
   }, 
@@ -23,7 +23,7 @@ state.previousPage=payload
       state.visibleSection = payload;
     },
     changeUserVerificationStatus(state,payload){
-      state.isUserVerified=payload.user
+      state.isUserVerified=payload.user || false
       state.userEmail=payload.email
       state.userVerificationToken=payload.token
     },

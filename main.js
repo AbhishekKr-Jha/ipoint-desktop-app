@@ -2,7 +2,7 @@
 
 const { BrowserWindow , app, ipcMain, Menu , screen}=require('electron')
 const path=require('path')
-console.log("the main dir is",path.join(__dirname))
+// console.log("the main dir is",path.join(__dirname,'/renderer/asset/icon01.png'))
 
 const create_window_func=()=>{
  
@@ -10,13 +10,14 @@ const create_window_func=()=>{
   const { width, height } = primaryDisplay.workAreaSize;
   
 const win=new BrowserWindow({
-    height:height,
+    height:height, 
     width:width,
     // height:800,
     // width:1200,
     // frame:false,
+    icon: path.join(__dirname,'/renderer/asset/icon01.png') ,
 webPreferences:{
-    nodeIntegration:true,
+    nodeIntegration:true, 
     contextIsolation:false
 }
 })
@@ -51,7 +52,7 @@ ipcMain.on('open-zoom-window',(event,data)=>{
 })
   Menu.setApplicationMenu(null);
 
-// win.webContents.openDevTools()
+win.webContents.openDevTools()
 
 // zoomWindow.webContents.openDevTools()
 

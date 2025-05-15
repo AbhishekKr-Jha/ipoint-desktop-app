@@ -13,7 +13,7 @@ Vue.component('header-component',{
 
 
 
-<div v-for="item in sideBarMenuList" :key="item.title"  @click="handle_changeSection(item.section)"   :style="{ gap: '2px', width: isSideBarOpen ? '250px' : '50px', backgroundColor:currentSVisibleSection ==item.section ? '#5C31FF':'#272727'  }" class=" text-white rounded-lg flex justify-start items-center  pointer text-lg nav-item"  >
+<div v-for="item in sideBarMenuList" :key="item.title" :title="item.title"  @click="handle_changeSection(item.section)"   :style="{ gap: '2px', width: isSideBarOpen ? '250px' : '50px', backgroundColor:currentSVisibleSection ==item.section ? '#5C31FF':'#272727'  }" class=" text-white rounded-lg flex justify-start items-center  pointer text-lg nav-item"  >
 <div style="width:50px;flex-shrink:0;" class="h-full flex items-center justify-center  "  > 
 <span class="fa-icon text-2xl text-white" v-html="item.unicode" ></span>
 </div>
@@ -57,17 +57,18 @@ Vue.component('header-component',{
                     title:' Share ',
                     section:'share-section'
                 },
-                  {
+                  
+                {
+                    icon:' fa-solid fa-gamepad ',
+                     unicode: '&#xf302  ' ,
+                    title:'Uploads ', 
+                    section:'view-section'
+                },
+                {
                     icon:'fa-solid fa-check ',
                      unicode: '&#xf00c  ' ,
                     title:' Verify ',
                     section:'verification-section'
-                },
-                {
-                    icon:' fa-solid fa-gamepad ',
-                     unicode: '&#xf302  ' ,
-                    title:'View ',
-                    section:'view-section'
                 },
                 {
                     icon:' fa-solid fa-gamepad ',

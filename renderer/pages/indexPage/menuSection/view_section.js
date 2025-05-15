@@ -44,8 +44,10 @@ Vue.component('view-component',{
 </div>
 
 
-</div>
+<p v-show="imageList.length==0 && documentList.length==0 && others.length==0" class="text-2xl fonnt-medium text-center mt-120" > No data available </p>
 
+</div>
+  
        </div>
     `,
     data(){
@@ -76,7 +78,7 @@ console.log("the result is",result)
     if(result.success){
     console.log("get upload list call was successful")
     this.fileList=result.responseData.url_list
-    this.fileList.forEach(item=>{
+    this.fileList.forEach(item=>{  
 const fileType=item.key.split('/')[1]  
 console.log("the file type is",fileType)  
 if(fileType=="image"){ this.imageList.push(item) }

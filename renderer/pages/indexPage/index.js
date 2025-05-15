@@ -8,16 +8,14 @@ Vue.component('index-component',{
   <div style="padding: 10px;" class="w-full h-screen overflow-hidden overflow-y-auto " >
 
 
+
 <home-component v-show="sectionVisibility=='home-section'" > </home-component>
 <search-component v-if="sectionVisibility=='search-section'"  ></search-component> 
 <verification-component  v-if="sectionVisibility=='verification-section'"  ></verification-component>
 <upload-component v-if="sectionVisibility=='upload-section'" ></upload-component>
 <share-component v-if="sectionVisibility=='share-section'" ></share-component>
-<modal-wrapper-component v-show="isModalVisible"  @close-modal-event="handleCloseModal" >
-<share-component></share-component>
-</modal-wrapper-component>
 <view-component v-if="sectionVisibility=='view-section'" ></view-component>
-<game-component v-if="sectionVisibility=='game-section'" > </game-component>
+<game-component v-show="sectionVisibility=='game-section'" > </game-component>
 
 </div>
     ` ,
@@ -36,6 +34,9 @@ Vue.component('index-component',{
 handleCloseModal(){
     this.$store.commit('changeShareModalStatus')
 },
+change(){ 
+    this.$store.commit('changeUserVerificationStatus',{userEmail:null,userVerificationToken:null,user:false})
+}
 
     },
     created(){

@@ -25,6 +25,9 @@ Vue.component('upload-component',{
 
 <button v-show="fileData" type="button" class="button" @click="handleFileUpload" > Upload </button>
 
+<p v-show="!isLoader && responseMessage" :style="{color:responseStatus ? 'green' : 'red'}" class=" text-xl font-medium ">!! {{responseMessage}} !! </p>
+
+
 </div>
 
 
@@ -34,7 +37,9 @@ Vue.component('upload-component',{
     return{
       fileData:null,
 isLoader:false,
-fileName:''
+fileName:'',
+responseMessage:null,
+        responseStatus:false,
     } 
   },
     computed:{
@@ -74,9 +79,21 @@ if(result.success){
   
   console.log("the presiged url is",result.responseData)
 await this.preSignedUrlUpload(result.responseData.presigned_url)
+this.responseMessage="File uploaded successfully!"
+this.responseStatus=true
+ setTimeout(() => {
+    this.responseStatus=false
+    this.responseMessage=null
+   }, 6000);
   return
 }  
   this.isLoader=false
+  this.responseMessage=result.errorMessage || "File upload was unsuccessful!"
+this.responseStatus=false 
+ setTimeout(() => {
+    this.responseStatus=false
+    this.responseMessage=null
+   }, 6000);
 console.log("error occured in post-api-call-upload due to",response.errorMessage || "File upload error!")
 }
 

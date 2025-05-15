@@ -31,7 +31,7 @@ Vue.component("verification-component", {
     <button type="button" @click="verifyOtpHandler" class=" button" >Verify OTP </button>
 </div>
 
-<p  style="color:red;display:none;" class="text-base" >Please enter the 6 digit otp</p>
+<p v-show="!isLoader && responseMessage" :style="{color:responseStatus ? 'green' : 'red'}" class=" text-xl font-medium ">!! {{responseMessage}} !! </p>
 
 
 
@@ -41,7 +41,10 @@ Vue.component("verification-component", {
     return {
       changeUserEmail:null,
       isOtpInputVisible: false,
-      email: 'akjha4127@gmail.com',
+    responseMessage:null,
+responseStatus:false,
+      // email: 'akjha4127@gmail.com',
+      email: null ,
       otp: null,
       isLoader: false,
       token:null,
@@ -49,20 +52,28 @@ Vue.component("verification-component", {
     };
   },
   computed: {
-isUserVerified() {  return this.$store.state.isUserVerified }
+isUserVerified() {  return this.$store.state.isUserVerified },
+userEmail(){ return this.$store.state.userEmail }
   },
   methods: {
     async requestOtpHandler() {
       this.isLoader=true
       const result=await postApiCall('/request_otp',{userEmail:this.email})
       this.isLoader=false
+      setTimeout(() => {
+    this.responseStatus=false
+    this.responseMessage=null
+   }, 6000);
+      this.responseStatus=result.success
       if(result.success){
 this.isOtpInputVisible=true 
 this.otp=result.responseData.otp
 this.token=result.responseData.token
+this.responseMessage=result.responseData.message
 this.message="Verifying otp..."
         return
       }
+      this.responseMessage=result.errorMessage
       console.log("the error in request otp is",result.errorMessage)
     },
     
@@ -70,15 +81,22 @@ this.message="Verifying otp..."
       this.isLoader=true
       const result=await postApiCall('/verify_otp',{otp:this.otp,token:this.token,userEmail:this.email})
    this.isLoader=false
+      setTimeout(() => {
+    this.responseStatus=false
+    this.responseMessage=null
+   }, 6000);
+      this.responseStatus=result.success
       if(result.success){
         console.log("the api call is successful",this.email)
         this.otp=null
         this.token=null
+        this.responseMessage=result.responseData.message
         this.$store.commit('changeUserVerificationStatus',{email:this.email,token:result.responseData.verification_token,user:true})
     this.$store.commit('change_section_visibility','search-section')
         this.isOtpInputVisible=false
         return 
     }
+    this.responseMessage=result.errorMessage 
     console.log("the error in verify otp is",result.errorMessage || "Can not be verified!")
     },
     changeUser(){
@@ -88,6 +106,7 @@ this.$store.commit('changeUserVerificationStatus',{email:null,token:null,user:fa
 
   created() {
     this.changeUserEmail= !this.isUserVerified
+    this.email=this.userEmail
     console.log("the verificatuon section is opend now");
   }
 });

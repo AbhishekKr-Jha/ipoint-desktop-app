@@ -60,6 +60,8 @@ Vue.component('share-component',{
 
 <button v-show="fileList.length>0"  @click="handleFileShare" type="button"  class=" button " >Share </button>
 
+<p v-show="!isLoader && responseMessage" :style="{color:responseStatus ? 'green' : 'red'}" class=" text-xl font-medium ">!! {{responseMessage}} !! </p>
+
 </div>
 
 
@@ -72,8 +74,10 @@ Vue.component('share-component',{
         // receiverEmail:'abhishekhp935@gmail.com',
         // receiverEmail:'fidekim530@daupload.com',
         isLoader:false,
-        receiverEmail:'japexe5958@daupload.com',
-        title:"hello", 
+        responseMessage:null,
+        responseStatus:false,
+        receiverEmail:null,
+        title:null, 
         message:null,
         fileList:[],
     verificationToken:null,
@@ -96,7 +100,7 @@ handleFileInput(e){
     selectedFile.preview=URL.createObjectURL(e.target.files[0])
     console.log("the value is",selectedFile.type)
     this.fileList.push(selectedFile)
-e.target.files=null
+// e.target.files=[]
 },
 handleUnselectFile(fileIndex){
     this.fileList=this.fileList.filter((item,index)=>index!==fileIndex) || []
@@ -110,24 +114,43 @@ async handleFileShare(){
     const formData=new FormData()
 formData.append('token', this.userVerificationToken);    
 formData.append('userEmail', this.userEmail); 
-formData.append('receiverEmail', this.receiverEmail);
-formData.append('title', this.title); 
-formData.append('message', this.message);
+if (this.receiverEmail != null) {
+  formData.append('receiverEmail', this.receiverEmail);
+}
+
+if (this.title != null) {
+  formData.append('title', this.title);
+}
+
+if (this.message != null) {
+  formData.append('message', this.message);
+}
+
 this.fileList.forEach(item=>formData.append('sharedFile',item))
     const result=await postApiCall('/send_file_input',formData,headers={'Content-Type': 'multipart/form-data'})
    this.isLoader=false
+
+   setTimeout(() => {
+    this.responseStatus=false
+    this.responseMessage=null
+   }, 6000);
+
+     this.responseStatus=result.success
     if(result.success){
         this.fileList=[]
         this.title=null
         this.message=null
+        this.responseMessage=result.responseData.message
 console.log("the successful result",result.responseData.message)
         return
     }
+            this.responseMessage=result.errorMessage
     console.log("the error is",result.errorMessage || "Server is facing some issues! Try after some time.")
 }
 
     },
     created() {
+        console.log("the user token ts",this.userVerificationToken)
         // const userData=JSON.parse(localStorage.getItem('userData'))
         // this.userEmail=userData?.userEmail  || null
         // this.verificationToken=userData?.userVerificationToken  || null 

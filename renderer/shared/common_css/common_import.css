@@ -11,3 +11,18 @@
 @import url('./loader.css');
 @import url('../../pages/indexPage/components/image-card/imageCard.css');
 @import url('../../pages/indexPage/components/image-details/imageDetails.css');
+
+
+
+
+/* this.responseMessage=result.responseData.message
+this.responseStatus=true
+
+
+this.responseMessage=result.errorMessage
+this.responseStatus=false
+
+ setTimeout(() => {
+    this.responseStatus=false
+    this.responseMessage=null
+   }, 6000); */
